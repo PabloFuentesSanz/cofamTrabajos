@@ -14,7 +14,46 @@ a {
   color: inherit;
   text-decoration: none;
 }
+input {
+  display: block;
+  border: 0px;
+  font-size: medium;
+  font-weight: 600;
+  width: 80%;
+  padding: 1.2em;
+  margin:auto;
+  margin-bottom: 2em;
+  border-radius: 20px;
+  background-color: aliceblue;
+}
+input::placeholder{
+  color:rgba(151, 179, 206, 0.658);
+}
+*:focus{
+  outline:none;
+}
+
+main {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.container {
+  display: grid;
+  height: 100vh;
+  place-items: center;
+}
 
 * {
   box-sizing: border-box;
+}
+
+@media (min-width: 520px) {
+  main {
+    height: 90vh;
+    width: 520px;
+  }
 }
