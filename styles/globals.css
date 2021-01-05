@@ -45,6 +45,8 @@ main {
   display: grid;
   height: 100vh;
   place-items: center;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
 }
 
 * {
