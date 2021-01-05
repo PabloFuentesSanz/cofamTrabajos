@@ -1,13 +1,14 @@
 import Head from "next/head";
-import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
-import firebase from "../firebase/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
-
+import useUser from "../hooks/useUser";
 
 export default function Home() {
-  
+  const user = useUser();
+
+
   return (
     <>
       <Head>
@@ -16,8 +17,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Header />
-        home
+        <Navbar />
+
       </main>
     </>
   );

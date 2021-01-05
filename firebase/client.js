@@ -15,6 +15,19 @@ const firebaseConfig = {
 !firebase.apps.length && firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+const mapUserFromFirebaseAuth = (user) => {
+    const {email, displayName} = user;
+    return {email, displayName};
+  };
+
+//Cuando el estado del usuario cambia
+export const onAuthStateChanged = (setUser) => {
+    return firebase.auth().onAuthStateChanged((user) => {
+      const finalUser = user ? mapUserFromFirebaseAuth(user) : null;
+      setUser(finalUser);
+    });
+  };
+
 export const loginWithMail = (email, password) => {
   return auth.signInWithEmailAndPassword(email, password);
 };
