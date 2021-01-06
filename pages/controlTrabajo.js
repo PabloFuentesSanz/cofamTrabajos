@@ -11,6 +11,12 @@ export default function ControlTrabajo() {
   const user = useUser();
   const [value, onChange] = useState(new Date());
 
+  const handleClickDay = (value, event) => {
+    let arrayWord = value + "";
+    arrayWord = arrayWord.split(" ");
+    alert(arrayWord[1] + " " + arrayWord[2] + " " +arrayWord[3]);
+  };
+
   return (
     <>
       <Head>
@@ -22,7 +28,12 @@ export default function ControlTrabajo() {
         <Navbar />
         <div className={styles.contenedor}>
           <h1>Control de Trabajo</h1>
-          <Calendar className={styles.cal} onChange={onChange} value={value} />
+          <Calendar
+            onClickDay={handleClickDay}
+            className={styles.cal}
+            onChange={onChange}
+            value={value}
+          />
         </div>
       </main>
     </>
