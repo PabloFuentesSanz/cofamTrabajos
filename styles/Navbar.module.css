@@ -5,3 +5,8 @@
 .cerrar:hover{
     color :rgb(206, 9, 9) !important;
 }
+
+.inicio{
+    cursor: pointer;
+}
+ 

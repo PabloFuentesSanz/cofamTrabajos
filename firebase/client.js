@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -15,18 +16,20 @@ const firebaseConfig = {
 !firebase.apps.length && firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+const database = firebase.firestore();
+
 const mapUserFromFirebaseAuth = (user) => {
-    const {email, displayName} = user;
-    return {email, displayName};
-  };
+  const { email, displayName } = user;
+  return { email, displayName };
+};
 
 //Cuando el estado del usuario cambia
 export const onAuthStateChanged = (setUser) => {
-    return firebase.auth().onAuthStateChanged((user) => {
-      const finalUser = user ? mapUserFromFirebaseAuth(user) : null;
-      setUser(finalUser);
-    });
-  };
+  return firebase.auth().onAuthStateChanged((user) => {
+    const finalUser = user ? mapUserFromFirebaseAuth(user) : null;
+    setUser(finalUser);
+  });
+};
 
 export const loginWithMail = (email, password) => {
   return auth.signInWithEmailAndPassword(email, password);
@@ -34,4 +37,13 @@ export const loginWithMail = (email, password) => {
 
 export const logout = () => {
   return auth.signOut();
+};
+
+export const addJornada = ({ fecha, obra, trabajadores, notas }) => {
+  return db.collection("jornada").add({
+    fecha,
+    obra,
+    trabajadores,
+    notas,
+  });
 };

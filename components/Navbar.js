@@ -31,22 +31,14 @@ export default function Header() {
 
   return (
     <Navbar bg="light" expand="">
-      <Navbar.Brand href="#home"> Tejados Cofam</Navbar.Brand>
+      <Navbar.Brand className={styles.inicio} onClick={handleClickHome}> Tejados Cofam</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="" onClick={handleClickHome}>
-            Inicio
-          </Nav.Link>
-          <Nav.Link href="" onClick={handleClickTrabajo}>
-            Control de Trabajo
-          </Nav.Link>
-          <Nav.Link href="" onClick={handleClickObras}>
-            Obras Realizadas
-          </Nav.Link>
-          <Nav.Link href="" onClick={handleClickTrabajadores}>
-            Trabajadores
-          </Nav.Link>
+          <Nav.Link onClick={handleClickHome}>Inicio</Nav.Link>
+          <Nav.Link onClick={handleClickTrabajo}>Control de Trabajo</Nav.Link>
+          <Nav.Link onClick={handleClickObras}>Obras Realizadas</Nav.Link>
+          <Nav.Link onClick={handleClickTrabajadores}>Trabajadores</Nav.Link>
           <NavDropdown.Divider />
           <Nav.Link className={styles.cerrar} onClick={handleClick}>
             Cerrar Sesión
