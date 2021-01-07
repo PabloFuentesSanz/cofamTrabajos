@@ -3,8 +3,9 @@ import Navbar from "../../components/Navbar";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 import useUser from "../../hooks/useUser";
+import { route } from "next/dist/next-server/server/router";
 
-export default function diaCalendario() {
+export default function NuevaObraFecha() {
   const user = useUser();
   const router = useRouter();
 
@@ -51,9 +52,6 @@ export default function diaCalendario() {
       break;
   }
 
-  const handleClickNueva = () => {
-    router.replace("/nuevaObraFecha/" + id);
-  };
 
   const fecha = arrayFecha[1] + " de " + arrayFecha[0] + " de " + arrayFecha[2];
   return (
@@ -65,15 +63,7 @@ export default function diaCalendario() {
       <main className={styles.main}>
         <Navbar />
         <h4 className={styles.h4}>{fecha}</h4>
-        <br />
-        <div>
-          <button className={styles.button} onClick={handleClickNueva}>
-            Nueva Obra
-          </button>
-        </div>
-        <div>
-          <button className={styles.button}>Ver Obras</button>
-        </div>
+      
       </main>
     </>
   );

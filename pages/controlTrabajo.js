@@ -8,14 +8,14 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 export default function ControlTrabajo() {
-  const route = useRouter();
+  const router = useRouter();
   const user = useUser();
   const [value, onChange] = useState(new Date());
 
   const handleClickDay = (value, event) => {
     let arrayWord = value + "";
     arrayWord = arrayWord.split(" ");
-    route.replace("/diaCalendario/"+arrayWord[1] + "-" + arrayWord[2] + "-" +arrayWord[3]);
+    router.replace("/diaCalendario/"+arrayWord[1] + "-" + arrayWord[2] + "-" +arrayWord[3]);
   };
 
 
