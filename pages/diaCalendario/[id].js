@@ -8,8 +8,8 @@ export default function diaCalendario() {
   const user = useUser();
   const router = useRouter();
 
-  const { id } = router.query;
-
+  let { id } = router.query;
+  id = id + "";
   let arrayFecha = id.split("-");
 
   switch (arrayFecha[0]) {

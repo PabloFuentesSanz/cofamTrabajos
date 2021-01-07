@@ -9,8 +9,8 @@ export default function NuevaObraFecha() {
   const user = useUser();
   const router = useRouter();
 
-  const { id } = router.query;
-
+  let { id } = router.query;
+  id = id + "";
   let arrayFecha = id.split("-");
 
   switch (arrayFecha[0]) {
@@ -52,7 +52,6 @@ export default function NuevaObraFecha() {
       break;
   }
 
-
   const fecha = arrayFecha[1] + " de " + arrayFecha[0] + " de " + arrayFecha[2];
   return (
     <>
@@ -63,7 +62,6 @@ export default function NuevaObraFecha() {
       <main className={styles.main}>
         <Navbar />
         <h4 className={styles.h4}>{fecha}</h4>
-      
       </main>
     </>
   );
