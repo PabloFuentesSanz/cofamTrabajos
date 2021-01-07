@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import useUser from "../../hooks/useUser";
 import { route } from "next/dist/next-server/server/router";
 
-export default function NuevaObraFecha() {
+export default function NuevaJornada() {
   const user = useUser();
   const router = useRouter();
 
@@ -61,7 +61,10 @@ export default function NuevaObraFecha() {
       </Head>
       <main className={styles.main}>
         <Navbar />
-        <h4 className={styles.h4}>{fecha}</h4>
+        <h4 className={styles.h4}>Nueva Jornada {fecha}</h4>
+        <input type="text" placeholder="Seleccionar Obra"/>
+        <input type="text" placeholder="Seleccionar Trabajadores"/>
+        <textarea placeholder="Notas" rows="10"></textarea>
       </main>
     </>
   );

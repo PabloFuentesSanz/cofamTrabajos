@@ -21,16 +21,33 @@ input {
   font-weight: 600;
   width: 80%;
   padding: 1.2em;
-  margin:auto;
+  margin: auto;
   margin-bottom: 2em;
   border-radius: 20px;
   background-color: aliceblue;
 }
-input::placeholder{
-  color:rgba(151, 179, 206, 0.658);
+input::placeholder {
+  color: rgba(151, 179, 206, 0.658);
 }
-*:focus{
-  outline:none;
+
+textarea {
+  border: 0px;
+  font-size: medium;
+  font-weight: 600;
+  width: 80%;
+  padding: 1.2em;
+  margin: auto;
+  margin-bottom: 2em;
+  border-radius: 20px;
+  background-color: aliceblue;
+}
+
+textarea::placeholder {
+  color: rgba(151, 179, 206, 0.658);
+}
+
+*:focus {
+  outline: none;
 }
 
 main {
