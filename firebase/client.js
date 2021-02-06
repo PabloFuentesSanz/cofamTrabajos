@@ -57,8 +57,13 @@ export const setJornada = ({ fecha, obra, trabajadores, notas }) => {
     Trabajadores: trabajadores
   })
 }
-
-export const getTrabajadores= async () => {
+export const setTrabajador = ({ nombre, apellidos }) => {
+  db.collection('Trabajador').add({
+    Nombre: nombre,
+    Apellidos: apellidos
+  })
+}
+export const getTrabajadores = async () => {
   const citiesRef = db.collection('Trabajador');
   const snapshot = await citiesRef.get();
   if (snapshot.empty) {
@@ -68,7 +73,14 @@ export const getTrabajadores= async () => {
   return snapshot;
 }
 
-export const getObras= async () => {
+export const setObra = ({ nombre, direccion }) => {
+  db.collection('Obra').add({
+    Nombre: nombre,
+    Direccion: direccion
+  })
+}
+
+export const getObras = async () => {
   const citiesRef = db.collection('Obra');
   const snapshot = await citiesRef.get();
   if (snapshot.empty) {
