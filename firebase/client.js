@@ -16,7 +16,7 @@ const firebaseConfig = {
 !firebase.apps.length && firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-const database = firebase.firestore();
+const db = firebase.firestore();
 
 const mapUserFromFirebaseAuth = (user) => {
   const { email, displayName } = user;
@@ -39,11 +39,22 @@ export const logout = () => {
   return auth.signOut();
 };
 
-export const addJornada = ({ fecha, obra, trabajadores, notas }) => {
-  return db.collection("jornada").add({
-    fecha,
-    obra,
-    trabajadores,
-    notas,
-  });
-};
+export const getJornadasByDate = async (fecha) => {
+  const citiesRef = db.collection('Jornada');
+  const snapshot = await citiesRef.where('Fecha', '==', fecha).get();
+  if (snapshot.empty) {
+    console.log('No matching documents.');
+    return;
+  }
+  return snapshot;
+}
+
+export const setJornada = ({ fecha, obra, trabajadores, notas }) => {
+  db.collection('Jornada').add({
+    Fecha: fecha,
+    Notas: notas,
+    Obra: obra,
+    Trabajadores: trabajadores
+  })
+}
+

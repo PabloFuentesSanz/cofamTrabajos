@@ -2,57 +2,25 @@ import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
-import useUser from "../../hooks/useUser";
-import { route } from "next/dist/next-server/server/router";
+import useUser from "../../hooks/useUser"
+import {setJornada} from "../../firebase/client.js";
+import {useState} from "react";
 
 export default function NuevaJornada() {
   const user = useUser();
   const router = useRouter();
 
   let { id } = router.query;
-  id = id + "";
-  let arrayFecha = id.split("-");
 
-  switch (arrayFecha[0]) {
-    case "Jan":
-      arrayFecha[0] = "Enero";
-      break;
-    case "Feb":
-      arrayFecha[0] = "Febrero";
-      break;
-    case "Mar":
-      arrayFecha[0] = "Marzo";
-      break;
-    case "Apr":
-      arrayFecha[0] = "Abril";
-      break;
-    case "May":
-      arrayFecha[0] = "Mayo";
-      break;
-    case "Jun":
-      arrayFecha[0] = "Junio";
-      break;
-    case "Jul":
-      arrayFecha[0] = "Julio";
-      break;
-    case "Aug":
-      arrayFecha[0] = "Agosto";
-      break;
-    case "Sep":
-      arrayFecha[0] = "Septiembre";
-      break;
-    case "Oct":
-      arrayFecha[0] = "Octubre";
-      break;
-    case "Nov":
-      arrayFecha[0] = "Noviembre";
-      break;
-    case "Dec":
-      arrayFecha[0] = "Diciembre";
-      break;
+  const fecha = id;
+  const [obra, setObra] = useState('');
+  const [trabajadores, setTrabajadores] = useState('');
+  const [notas, setNotas] = useState('');
+
+  const submitValue = ()=>{
+    setJornada({fecha, obra, trabajadores, notas});
   }
 
-  const fecha = arrayFecha[1] + " de " + arrayFecha[0] + " de " + arrayFecha[2];
   return (
     <>
       <Head>
@@ -62,9 +30,11 @@ export default function NuevaJornada() {
       <main className={styles.main}>
         <Navbar />
         <h4 className={styles.h4}>Nueva Jornada {fecha}</h4>
-        <input type="text" placeholder="Seleccionar Obra"/>
-        <input type="text" placeholder="Seleccionar Trabajadores"/>
-        <textarea placeholder="Notas" rows="10"></textarea>
+        <input type="text" placeholder="Seleccionar Obra" value={obra} onChange={e=> setObra(e.target.value)} />
+        <input type="text" placeholder="Seleccionar Trabajadores" value={trabajadores} onChange={e=> setTrabajadores(e.target.value)} />
+        <textarea placeholder="Notas" rows="10" value={notas} onChange={e=> setNotas(e.target.value)}></textarea>
+        <hr />
+        <button onClick={submitValue}>Enviar</button>
       </main>
     </>
   );
