@@ -8,6 +8,16 @@ import useUser from "../hooks/useUser";
 export default function Trabajadores() {
   const user = useUser();
 
+  const route = useRouter();
+
+  const handleClickNuevo = (e) => {
+    e.preventDefault();
+    route.replace("/nuevoTrabajor");
+  };
+  const handleVer = (e) => {
+    e.preventDefault();
+    route.replace("/listaTrabajadores");
+  };
   return (
     <>
       <Head>
@@ -18,7 +28,14 @@ export default function Trabajadores() {
       <main className={styles.main}>
         <Navbar />
         <div className={styles.contenedor}>
-          trabajadores
+          <h2>Trabajadores</h2>
+          <br /> <br /> <br />
+          <div>
+            <button className={styles.button} onClick={handleClickNuevo}>Nuevo Trabajador</button>
+          </div>
+          <div>
+            <button className={styles.button} onClick={handleVer}>Ver Trabajadores</button>
+          </div>
         </div>
       </main>
     </>

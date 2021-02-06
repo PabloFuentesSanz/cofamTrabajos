@@ -68,3 +68,13 @@ export const getTrabajadores= async () => {
   return snapshot;
 }
 
+export const getObras= async () => {
+  const citiesRef = db.collection('Obra');
+  const snapshot = await citiesRef.get();
+  if (snapshot.empty) {
+    console.log('No matching documents.');
+    return;
+  }
+  return snapshot;
+}
+
