@@ -58,3 +58,13 @@ export const setJornada = ({ fecha, obra, trabajadores, notas }) => {
   })
 }
 
+export const getTrabajadores= async () => {
+  const citiesRef = db.collection('Trabajador');
+  const snapshot = await citiesRef.get();
+  if (snapshot.empty) {
+    console.log('No matching documents.');
+    return;
+  }
+  return snapshot;
+}
+

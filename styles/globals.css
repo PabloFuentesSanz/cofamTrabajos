@@ -14,7 +14,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
-input {
+input, select {
   display: block;
   border: 0px;
   font-size: medium;

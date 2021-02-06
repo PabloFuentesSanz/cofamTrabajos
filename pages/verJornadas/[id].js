@@ -20,7 +20,9 @@ export default function VerJornadas() {
         const jornadas = await getJornadasByDate(fecha + "");
         jornadas.forEach(doc => {
             const { Obra } = doc.data();
-            contenido += `<p>${Obra}</p>`
+            contenido += `<a href=""><div style="background-color:#d9d9d9; padding: 3px; border-top:1px solid black; text-align: left">
+                            <p>${Obra}</p>
+                        </div></a>`
             setLista(contenido);
         });
     }
