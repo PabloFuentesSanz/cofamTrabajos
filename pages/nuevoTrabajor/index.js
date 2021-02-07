@@ -5,12 +5,6 @@ import { useRouter } from "next/router";
 import useUser from "../../hooks/useUser"
 import { setTrabajador } from "../../firebase/client.js";
 import { useState } from "react";
-import { getTrabajadores, getObras} from "../../firebase/client.js"
-import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
-
-
-
 
 export default function NuevoTrabajador() {
   const user = useUser();

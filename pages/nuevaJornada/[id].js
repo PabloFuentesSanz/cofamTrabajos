@@ -5,12 +5,9 @@ import { useRouter } from "next/router";
 import useUser from "../../hooks/useUser"
 import { setJornada } from "../../firebase/client.js";
 import { useState } from "react";
-import { getTrabajadores, getObras} from "../../firebase/client.js"
+import { getTrabajadores, getObras } from "../../firebase/client.js"
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
-
-
-
 
 export default function NuevaJornada() {
   const user = useUser();
@@ -28,7 +25,7 @@ export default function NuevaJornada() {
   }
 
   const options = []
-  const optionsObra  = []
+  const optionsObra = []
   const animatedComponents = makeAnimated();
 
   let contenido = ""
@@ -36,18 +33,28 @@ export default function NuevaJornada() {
     const trabajadores = await getTrabajadores();
     trabajadores.forEach(doc => {
       const { Nombre } = doc.data();
-      const file = {value: Nombre, label: Nombre}
+      const file = { value: Nombre, label: Nombre }
       options.push(file);
     });
 
     const obras = await getObras();
     obras.forEach(doc => {
       const { Nombre } = doc.data();
-      const file = {value: Nombre, label: Nombre}
+      const file = { value: Nombre, label: Nombre }
       optionsObra.push(file);
     });
   }
+
   getTrab();
+  
+  const handleChange = selectedOption => {
+    setObra(selectedOption.value)
+  }
+
+  const handleChangeTrabajadores = selectedOption => {
+    setTrabajadores(JSON.stringify(selectedOption));
+  }
+
   return (
     <>
       <Head>
@@ -63,6 +70,8 @@ export default function NuevaJornada() {
           components={animatedComponents}
           options={optionsObra}
           placeholder={'Seleccionar obra'}
+          name="obras"
+          onChange={handleChange}
         />
 
         <Select className={styles.select}
@@ -71,7 +80,10 @@ export default function NuevaJornada() {
           isMulti
           options={options}
           placeholder={'Seleccionar trabajadores'}
+          name="trabajadores"
+          onChange={handleChangeTrabajadores}
         />
+
         <textarea placeholder="Notas" rows="10" value={notas} onChange={e => setNotas(e.target.value)}></textarea>
         <hr />
         <button onClick={submitValue}>Enviar</button>
