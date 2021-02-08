@@ -9,14 +9,14 @@ import { useState } from "react";
 export default function NuevoTrabajador() {
   const user = useUser();
   const router = useRouter();
-  
+
   const [nombre, setNombre] = useState('')
   const [apellidos, setApellidos] = useState('')
 
   const submitValue = () => {
-    setTrabajador({ nombre, apellidos});
+    setTrabajador({ nombre, apellidos });
   }
- 
+
   return (
     <>
       <Head>
@@ -26,7 +26,6 @@ export default function NuevoTrabajador() {
       <main className={styles.main}>
         <Navbar />
         <h4 className={styles.h4}>Nuevo Trabajador</h4>
-
         <input placeholder="Nombre" value={nombre} onChange={e => setNombre(e.target.value)}></input>
         <input placeholder="Apellidos" value={apellidos} onChange={e => setApellidos(e.target.value)}></input>
         <hr />

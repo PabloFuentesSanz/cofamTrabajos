@@ -6,6 +6,8 @@ import useUser from "../../hooks/useUser"
 import { getJornadasByDate } from "../../firebase/client.js"
 import { useState, useEffect } from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'html-react-parser';
+import Link from 'next/link'
+
 
 export default function VerJornadas() {
     const user = useUser();
@@ -14,17 +16,21 @@ export default function VerJornadas() {
 
     let { id } = router.query;
 
+    const goTo = () => {
+        alert("hola")
+    };
+
     const fecha = id;
-    let contenido = ""
+    const myArrMadeFromForEach = [];
     const getJornadas = async () => {
         const jornadas = await getJornadasByDate(fecha + "");
-        jornadas.forEach(doc => {
+        jornadas.forEach((doc, i) => {
             const { Obra } = doc.data();
-            contenido += `<a href=""><div style="background-color:#d9d9d9; padding: 3px; border-top:1px solid black; text-align: left">
-                            <p>${Obra}</p>
-                        </div></a>`
-            setLista(contenido);
+            const ruta = `/editarJornada/${fecha}_${Obra}`
+            myArrMadeFromForEach.push(<Link href={ruta}><p>{Obra}</p></Link>)
+            
         });
+        setLista(myArrMadeFromForEach);
     }
 
 
@@ -40,7 +46,7 @@ export default function VerJornadas() {
             <main className={styles.main}>
                 <Navbar />
                 <h4 className={styles.h4}>Jornadas {fecha}</h4>
-                <div>{ReactHtmlParser(lista)}</div>
+                <div className={styles.divLista}>{lista}</div>
             </main>
         </>
     );

@@ -52,7 +52,7 @@ export default function NuevaJornada() {
   }
 
   const handleChangeTrabajadores = selectedOption => {
-    setTrabajadores(JSON.stringify(selectedOption));
+    setTrabajadores(selectedOption);
   }
 
   return (

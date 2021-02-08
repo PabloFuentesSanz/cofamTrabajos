@@ -38,3 +38,10 @@
     padding: 1.2em;
   
   }
+
+.divLista{
+    background-color:#EAEDED;
+    margin:2em;
+    padding: 1em;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.34);
+ }
