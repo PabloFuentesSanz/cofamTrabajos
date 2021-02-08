@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 import useUser from "../../hooks/useUser"
-import { updateJornada , getJornadaByDateObra } from "../../firebase/client.js";
+import { updateJornada, getJornadaByDateObra } from "../../firebase/client.js";
 import { useState } from "react";
 import { getTrabajadores, getObras } from "../../firebase/client.js"
 import Select from 'react-select'
@@ -14,7 +14,9 @@ export default function EditarJornada() {
     const router = useRouter();
 
     let { id } = router.query;
-    let array = id.split("_");
+    let array = async () => {
+        return await id.split("_");
+    }
     const fecha = array[0];
     const obraNombre = array[1];
 
@@ -24,7 +26,7 @@ export default function EditarJornada() {
     const [notas, setNotas] = useState('');
 
     const submitValue = () => {
-        updateJornada({idJornada,fecha, obra, trabajadores, notas });
+        updateJornada({ idJornada, fecha, obra, trabajadores, notas });
     }
 
     const options = []
