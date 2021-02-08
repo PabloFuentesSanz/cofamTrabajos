@@ -68,14 +68,9 @@ export const updateJornada = async ({idJornada, fecha, obra, trabajadores, notas
   });
 }
 
-export const getJornadaByDateObra = async (fecha, obra) =>{
-  const citiesRef = db.collection('Jornada');
-  const snapshot = await citiesRef.where('Fecha', '==', fecha).where('Obra','==',obra).get();
-  if (snapshot.empty) {
-    console.log('No matching documents.');
-    return;
-  }
-  return snapshot;
+export const getJornadaById = async (obraId) =>{
+  const citiesRef = db.collection('Jornada').doc(obraId).get();
+  return citiesRef;
 }
 
 export const setTrabajador = ({ nombre, apellidos }) => {

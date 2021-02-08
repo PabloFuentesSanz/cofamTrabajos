@@ -26,7 +26,8 @@ export default function VerJornadas() {
         const jornadas = await getJornadasByDate(fecha + "");
         jornadas.forEach((doc, i) => {
             const { Obra } = doc.data();
-            const ruta = `/editarJornada/${fecha}_${Obra}`
+            const obraid = doc.id;
+            const ruta = `/editarJornada/${obraid}`
             myArrMadeFromForEach.push(<Link href={ruta}><p>{Obra}</p></Link>)
             
         });

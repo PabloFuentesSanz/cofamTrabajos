@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 import useUser from "../../hooks/useUser"
-import { updateJornada, getJornadaByDateObra } from "../../firebase/client.js";
+import { updateJornada, getJornadaById } from "../../firebase/client.js";
 import { useState } from "react";
 import { getTrabajadores, getObras } from "../../firebase/client.js"
 import Select from 'react-select'
@@ -14,19 +14,17 @@ export default function EditarJornada() {
     const router = useRouter();
 
     let { id } = router.query;
-    let array = async () => {
-        return await id.split("_");
-    }
-    const fecha = array[0];
-    const obraNombre = array[1];
+    const obraId = id;
 
 
-    const [obra, setObra] = useState(obraNombre);
+    
+    const [fecha, setFecha] = useState('');
     const [trabajadores, setTrabajadores] = useState('');
     const [notas, setNotas] = useState('');
+    const [obra, setObra] = useState('');
 
     const submitValue = () => {
-        updateJornada({ idJornada, fecha, obra, trabajadores, notas });
+        updateJornada({ obraId, fecha, obra, trabajadores, notas });
     }
 
     const options = []
@@ -34,23 +32,25 @@ export default function EditarJornada() {
     const optionArray = []
     let optionsSelected = ""
     const animatedComponents = makeAnimated();
-    let idJornada = "";
-
+    let obraNombre = ""
 
     const getJornadaActual = async () => {
-        const info = await getJornadaByDateObra(fecha, obraNombre);
-        info.forEach(doc => {
-            const { Trabajadores, Notas } = doc.data();
-            idJornada = doc.id;
-            optionsSelected = Trabajadores
-            setNotas(Notas)
-        })
+        const info = await getJornadaById(obraId);
+
+        const {  Fecha, Trabajadores, Notas, Obra } = info.data();
+        optionsSelected = Trabajadores
+        setNotas(Notas)
+        setFecha(Fecha)
+        setObra(Obra)
+
         optionsSelected.forEach((item, i) => {
             const file = { value: optionsSelected[i].value, label: optionsSelected[i].label }
             optionArray.push(file)
         })
 
     }
+
+  
     const getTrab = async () => {
         const trabajadores = await getTrabajadores();
         trabajadores.forEach(doc => {
@@ -67,10 +67,6 @@ export default function EditarJornada() {
         });
 
     }
-
-    getTrab();
-    getJornadaActual();
-
     const handleChange = selectedOption => {
         setObra(selectedOption.value)
     }
@@ -78,6 +74,10 @@ export default function EditarJornada() {
     const handleChangeTrabajadores = selectedOption => {
         setTrabajadores(JSON.stringify(selectedOption));
     }
+
+    getTrab();
+    getJornadaActual();
+
 
     return (
         <>
@@ -87,16 +87,8 @@ export default function EditarJornada() {
             </Head>
             <main className={styles.main}>
                 <Navbar />
-                <h4 className={styles.h4}>Editar Jornada {fecha}</h4>
-
-                <Select className={styles.select}
-                    defaultValue={{ label: obraNombre, value: obraNombre }}
-                    closeMenuOnSelect={false}
-                    components={animatedComponents}
-                    options={optionsObra}
-                    name="obras"
-                    onChange={handleChange}
-                />
+                <h4 className={styles.h4}>Editar Jornada {fecha} </h4>
+                <h4>{obra}</h4>
 
                 <Select className={styles.select}
                     placeholder="Clica para ver trabajadores"
