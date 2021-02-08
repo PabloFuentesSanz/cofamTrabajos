@@ -53,12 +53,7 @@ export default function diaCalendario() {
 
   
   const fecha = arrayFecha[1] + " de " + arrayFecha[0] + " de " + arrayFecha[2];
-  const handleClickNueva = () => {
-    router.replace("/nuevaJornada/" + fecha);
-  };
-  const handleClickVer = () => {
-    router.replace("/verJornadas/" + fecha);
-  };
+
   
   return (
     <>
@@ -70,12 +65,12 @@ export default function diaCalendario() {
         <Navbar />
         <h4 className={styles.h4}>{fecha}</h4>
         <div>
-          <button className={styles.button} onClick={handleClickNueva}>
+          <a href={"/nuevaJornada/" + fecha}><button className={styles.button}>
             Nueva Jornada
-          </button>
+          </button></a>
         </div>
         <div>
-          <button className={styles.button} onClick={handleClickVer}>Ver Jornadas</button>
+          <a href={"/verJornadas/" + fecha}><button className={styles.button} >Ver Jornadas</button></a>
         </div>
       </main>
     </>

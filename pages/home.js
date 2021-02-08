@@ -6,20 +6,7 @@ import useUser from "../hooks/useUser";
 
 export default function HomePage() {
   const user = useUser();
-  const route = useRouter();
 
-  const handleClickTrabajo = (e) => {
-    e.preventDefault();
-    route.replace("/controlTrabajo");
-  };
-  const handleClickObras = (e) => {
-    e.preventDefault();
-    route.replace("/obras");
-  };
-  const handleClickTrabajadores = (e) => {
-    e.preventDefault();
-    route.replace("/trabajadores");
-  };
 
   return (
     <>
@@ -31,18 +18,18 @@ export default function HomePage() {
       <main className={styles.main}>
         <Navbar />
         <div className={styles.contenedor}>
-        <h2>Bienvenido Constantín</h2>
-        <br/>
+          <h2>Bienvenido Constantín</h2>
+          <br />
           <div>
-            <button className={styles.button} onClick={handleClickTrabajo}>
+            <a href="/controlTrabajo"><button className={styles.button} >
               Control de Trabajo
-            </button>
+            </button></a>
           </div>
           <div>
-            <button className={styles.button} onClick={handleClickObras}>Obras Realizadas</button>
-          </div>
+            <a href="/obras"><button className={styles.button}>Obras Realizadas</button>
+            </a></div>
           <div>
-            <button className={styles.button} onClick={handleClickTrabajadores}>Trabajadores</button>
+            <a  href="/trabajadores"><button className={styles.button} >Trabajadores</button></a>
           </div>
         </div>
       </main>
